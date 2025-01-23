@@ -2,6 +2,8 @@
   <div>
     <h2>Age: {{ age }}</h2>
     <button @click="add">Add Age</button>
+    <h2>The final conter is {{ finalCounter }}</h2>
+    <button @click="after">Execute after 2 seconds</button>
   </div>
 </template>
 
@@ -11,10 +13,19 @@ export default {
     age() {
       return this.$store.state.count;
     },
+    finalCounter() {
+      return this.$store.getters.finalCounter;
+    },
   },
   methods: {
     add() {
-      this.$store.commit('imcrement');
+      this.$store.commit('imcrement', 10);
+    },
+    after() {
+      this.$store.dispatch({
+        type: 'after',
+        payload: 10,
+      });
     },
   },
 };
@@ -29,7 +40,7 @@ div {
 }
 
 button {
-  width: 100px;
-  height: 20px;
+  width: 200px;
+  height: 30px;
 }
 </style>
